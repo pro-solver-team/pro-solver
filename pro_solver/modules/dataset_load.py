@@ -1,6 +1,6 @@
 from pro_solver.modules.dataset_process import to_q_a, make_doc_text, iter_rows
-from pro_solver.modules.text_processing import chunk_latex
-from pro_solver.modules.config import BATCH_SIZE
+from pro_solver.modules.text_process import chunk_latex
+from config.database.config import BATCH_SIZE
 import uuid
 from datasets import load_dataset, DatasetDict
 

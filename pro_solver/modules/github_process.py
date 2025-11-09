@@ -3,8 +3,8 @@ import pathlib
 from typing import List
 from git import Repo, GitCommandError
 import nbformat
-from pro_solver.modules.text_processing import chunk_text, safe_read_text
-from pro_solver.modules.config import INCLUDE_EXTS, SKIP_DIRS
+from pro_solver.modules.text_process import chunk_text, safe_read_text
+from config.database.config import INCLUDE_EXTS, SKIP_DIRS
 
 def safe_read_text(path: pathlib.Path) -> str:
     try:

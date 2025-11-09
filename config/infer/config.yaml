@@ -1,0 +1,5 @@
+default:
+  - math_config
+  - code_config
+
+LLM_NAME: "mistral-small-latest"

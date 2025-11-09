@@ -1,6 +1,6 @@
 import re
 from typing import Dict, List, Tuple
-from pro_solver.modules.config import MATH_BLOCK_PATTERNS
+from config.database.config import MATH_BLOCK_PATTERNS
 import nbformat
 import pathlib
 
@@ -91,3 +91,17 @@ def chunk_text(text: str, chunk_size: int = 1200, overlap: int = 200) -> List[st
             break
         start = max(0, end - overlap)
     return chunks
+
+import re, json
+
+def safe_json_parse(text: str):
+    cleaned = re.sub(r'```(?:json)?', '', text)
+    cleaned = re.sub(r'^[^{]*', '', cleaned)
+    cleaned = re.sub(r'[^}]*$', '', cleaned)
+    cleaned = cleaned.strip()
+    try:
+        return json.loads(cleaned)
+    except json.JSONDecodeError as e:
+        print("⚠️ JSON parsing failed, cleaning quotes...")
+        cleaned = cleaned.replace('\\"', '"').replace('"', '\\"').replace('\\"{', '{').replace('}\\"', '}')
+        return json.loads(cleaned)
