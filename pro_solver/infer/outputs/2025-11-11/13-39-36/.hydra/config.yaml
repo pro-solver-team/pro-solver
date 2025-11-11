@@ -1,9 +1,0 @@
-infer:
-  default:
-  - math_config
-  - code_config
-  llm_name: mistral-small-latest
-  db_dir: ../../data/chroma
-  collection_name: math
-  output_solver_name: shit.py
-  api_key: YuMiEfgDfIceV7hP7d7iryq8AdjNmIqH
