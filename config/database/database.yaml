@@ -1,5 +1,5 @@
 db_dir: "../../data/chroma"
-collection_name: "math"
+collection_name: "chroma_db"
 embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
 batch_size: 512
 max_records_per_dataset: 3

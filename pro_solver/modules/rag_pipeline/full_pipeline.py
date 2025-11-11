@@ -18,8 +18,8 @@ class RagPipeline:
                  info_num: int = 5
                  ):
         self.model = model
-        self.math_pipeline = ModelPipeline(**math_cfg)
-        self.code_pipeline = ModelPipeline(**code_cfg)
+        self.math_pipeline = ModelPipeline(self.model, **math_cfg)
+        self.code_pipeline = ModelPipeline(self.model, **code_cfg)
         self.collection = db
         self.page_num = info_num
 

@@ -1,1 +1,0 @@
-equation_input = "${python:config.infer.config.vars.equation_var.ReacDiff_Nu05_Rho20_dict}"

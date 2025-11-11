@@ -1,29 +1,22 @@
-import hydra
-from omegaconf import DictConfig
 import fire
-from pathlib import Path
-
 from pro_solver.modules.rag_pipeline.base_model import LLMModel
 from pro_solver.modules.rag_pipeline.full_pipeline import RagPipeline
 from pro_solver.modules.collection.collection import load_collection
 
+from pro_solver.infer.cfg_utils import equation_cfg_generate
+from pro_solver.infer.vars.infer_vars.model_var import llm_name, db_dir, collection_name, embedding_model
 
-root_path = Path().resolve().parents[1]
-config_rel_path = "config/infer"
-config_path = root_path/config_rel_path
-config_name = "config.yaml"
-
-@hydra.main(config_path=str(config_path), config_name=str(config_name))
-def main(cfg: DictConfig):
-    model = LLMModel(api_key = cfg.api_key, model_name = cfg.llm_name)
-    collection = load_collection(cfg.db_dir, cfg.collection_name)
-
+def main(api_key: str,
+         name: str,
+         output_name: str
+         ):
+    model = LLMModel(api_key = api_key, model_name = llm_name)
+    collection = load_collection(db_dir, collection_name, embedding_model)
+    math_cfg, code_cfg = equation_cfg_generate(name)
     #----- RAG ------
-    rag_dict = cfg.math_config
-    code_dict = cfg.code_config
-    pipeline = RagPipeline(model, rag_dict, code_dict, collection)
+    pipeline = RagPipeline(model, math_cfg, code_cfg, collection)
 
-    pipeline(cfg.output_solver_name)
+    pipeline(output_name)
 
 if __name__ == "__main__":
-    fire.Fire()
+    fire.Fire(main)
