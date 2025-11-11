@@ -1,7 +1,6 @@
 import re
 from typing import Dict, List, Tuple
-from pro_solver.modules.collection.repo_load.vars import MATH_BLOCK_PATTERNS
-from pro_solver.modules.collection.dataset_load.vars import MAX_CHARS, OVERLAP, CHUNK_SIZE, BATCH_SIZE
+from pro_solver.modules.collection.dataset_load.vars import MATH_BLOCK_PATTERNS, MAX_CHARS, OVERLAP, CHUNK_SIZE
 import nbformat
 import pathlib
 

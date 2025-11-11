@@ -6,7 +6,6 @@ import nbformat
 from pro_solver.modules.collection.dataset_load.text_process import chunk_text, safe_read_text
 from pro_solver.modules.collection.repo_load.vars import INCLUDE, SKIP_DIRS, CHUNK_SIZE, OVERLAP, BATCH_SIZE, REPOS_LOAD_PATH
 
-
 def safe_read_text(path: pathlib.Path) -> str:
     try:
         if path.suffix == ".ipynb":
