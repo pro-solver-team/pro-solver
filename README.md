@@ -15,8 +15,7 @@ cd pro_solver/database/
 poetry run python create_database.py
 ```
 
-Хард-код инференс:
+Генерация кода:
 ```
-cd ../infer/
-poetry run python infer.py API_KEY YOUR_QUESTION OUTPUT_SOLVER_NAME
+ python <path to inference.py> <api key> <your equation name> <output script name>
 ``` 
