@@ -1,7 +1,7 @@
 from langchain_mistralai.chat_models import ChatMistralAI
 
 class LLMModel:
-    def __init__(self, api_key: str, model_name: str = "mistral-small-latest", temperature: float = 0.5):
+    def __init__(self, api_key: str, model_name: str, temperature: float):
         self.model = ChatMistralAI(
                                    model=model_name,
                                    temperature=temperature,
