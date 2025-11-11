@@ -1,5 +1,5 @@
 from langchain_core.prompts import ChatPromptTemplate
-from pro_solver.modules.pde_prompt import PDEPPrompt
+from pro_solver.modules.rag_pipeline.pde_prompt import PDEPPrompt
 from pro_solver.modules.rag_pipeline.base_model import LLMModel
 
 class ModelPipeline():

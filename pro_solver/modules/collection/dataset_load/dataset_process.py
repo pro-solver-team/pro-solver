@@ -1,17 +1,13 @@
-# dataset_processing.py
 from typing import Dict, Any, Iterable, List, Tuple
-from datasets import load_dataset, DatasetDict, Dataset
-import uuid
+from datasets import Dataset
 
 def pick_first(d: Dict[str, Any], candidates: List[str]) -> str:
-    """Pick the first non-empty candidate field from a dictionary"""
     for c in candidates:
         if c in d and d[c] and isinstance(d[c], str) and d[c].strip():
             return d[c]
     return ""
 
 def to_q_a(dataset_name: str, row: Dict[str, Any]) -> Tuple[str, str, Dict[str, Any]]:
-    """Extract question and answer from dataset row based on dataset type"""
     dn = dataset_name.lower()
 
     if ("tiger-lab" in dn) and ("mathinstruct" in dn):
@@ -49,16 +45,12 @@ def to_q_a(dataset_name: str, row: Dict[str, Any]) -> Tuple[str, str, Dict[str, 
         }
         return q, a, meta
 
-    # Add other dataset types as needed...
-    
-    # Default case
     q = pick_first(row, ["question", "problem", "instruction", "prompt", "title", "query"])
     a = pick_first(row, ["solution", "answer", "output", "response", "explanation"])
     meta = {"dataset": dataset_name}
     return q, a, meta
 
 def make_doc_text(q: str, a: str) -> str:
-    """Format question and answer into a document"""
     q = q.strip()
     a = a.strip()
 
@@ -69,7 +61,6 @@ def make_doc_text(q: str, a: str) -> str:
     )
 
 def iter_rows(ds: Dataset, limit: int | None) -> Iterable[Dict[str, Any]]:
-    """Iterate over dataset rows with optional limit"""
     n = len(ds)
     count = n if limit is None else min(limit, n)
     for i in range(count):

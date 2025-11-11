@@ -4,7 +4,7 @@ from pathlib import Path
 
 from pro_solver.modules.rag_pipeline.base_model import LLMModel
 from pro_solver.modules.rag_pipeline.full_pipeline import RagPipeline
-from pro_solver.modules.collection import load_collection
+from pro_solver.modules.collection.collection import load_collection
 from config.database.config import DB_DIR, COLLECTION_NAME
 
 root_path = Path().resolve().parents[1]

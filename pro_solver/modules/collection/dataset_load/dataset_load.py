@@ -1,8 +1,8 @@
-from pro_solver.modules.dataset_process import to_q_a, make_doc_text, iter_rows
-from pro_solver.modules.text_process import chunk_latex
-from config.database.config import BATCH_SIZE
 import uuid
 from datasets import load_dataset, DatasetDict
+from pro_solver.modules.collection.dataset_load.dataset_process import to_q_a, make_doc_text, iter_rows
+from pro_solver.modules.collection.dataset_load.text_process import chunk_latex
+from pro_solver.modules.collection.dataset_load.vars import MAX_CHARS, OVERLAP, BATCH_SIZE
 
 def upsert_dataset(collection, hf_repo: str, limit: int | None):
     print(f"\n=== Loading {hf_repo} ===")
@@ -27,7 +27,7 @@ def upsert_dataset(collection, hf_repo: str, limit: int | None):
                 continue
             text = make_doc_text(q, a)
 
-            chunks = chunk_latex(text, max_chars=1200, overlap=150)
+            chunks = chunk_latex(text, max_chars=MAX_CHARS, overlap=OVERLAP)
             base_id = str(row.get("id") or row.get("_id") or row.get("problem_id") or uuid.uuid4())
 
             for j, ch in enumerate(chunks):

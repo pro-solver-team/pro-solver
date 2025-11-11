@@ -1,21 +1,20 @@
 import chromadb
 from chromadb.utils import embedding_functions
 from pathlib import Path
-from config.database.config import DB_DIR, COLLECTION_NAME, EMBEDDING_MODEL
 
-def initialize_collection():
-    client = chromadb.PersistentClient(path=DB_DIR)
+def initialize_collection(db_dir: str, collection_name: str, embedding_model: str):
+    client = chromadb.PersistentClient(path=db_dir)
     embed_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
-        model_name=EMBEDDING_MODEL
+        model_name=embedding_model
     )
     collection = client.get_or_create_collection(
-        name=COLLECTION_NAME,
+        name=collection_name,
         embedding_function=embed_fn,
         metadata={"hnsw:space": "cosine"}
     )
     
-    print(f"Chroma path: {DB_DIR}")
-    print(f"Collection: {COLLECTION_NAME}")
+    print(f"Chroma path: {db_dir}")
+    print(f"Collection: {collection_name}")
     return client, collection
 
 def get_collection_count(collection):
@@ -27,7 +26,7 @@ def query_collection(collection, query_text, n_results=3):
         n_results=n_results
     )
 
-def load_collection(db_path: str = DB_DIR, collection_name: str = COLLECTION_NAME):
+def load_collection(db_path: str, collection_name: str, embedding_model: str):
     try:
         abs_db_path = Path(db_path).resolve()
         
@@ -39,7 +38,7 @@ def load_collection(db_path: str = DB_DIR, collection_name: str = COLLECTION_NAM
         client = chromadb.PersistentClient(path=str(abs_db_path))
         
         embed_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
-            model_name=EMBEDDING_MODEL
+            model_name=embedding_model
         )
         
         collection = client.get_collection(

@@ -1,6 +1,6 @@
 import re
 from typing import Dict, List, Tuple
-from config.database.config import MATH_BLOCK_PATTERNS
+from pro_solver.modules.collection.repo_load.vars import MATH_BLOCK_PATTERNS
 import nbformat
 import pathlib
 

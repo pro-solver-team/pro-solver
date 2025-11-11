@@ -3,8 +3,9 @@ import pathlib
 from typing import List
 from git import Repo, GitCommandError
 import nbformat
-from pro_solver.modules.text_process import chunk_text, safe_read_text
-from config.database.config import INCLUDE_EXTS, SKIP_DIRS
+from pro_solver.modules.collection.dataset_load.text_process import chunk_text, safe_read_text
+from pro_solver.modules.collection.repo_load.vars import INCLUDE, SKIP_DIRS, CHUNK_SIZE, OVERLAP, BATCH_SIZE, REPOS_LOAD_PATH
+
 
 def safe_read_text(path: pathlib.Path) -> str:
     try:
@@ -28,7 +29,7 @@ def iter_repo_files(root: pathlib.Path):
         dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
         for fn in filenames:
             p = pathlib.Path(dirpath) / fn
-            if p.suffix.lower() in INCLUDE_EXTS:
+            if p.suffix.lower() in INCLUDE:
                 yield p
 
 def shallow_clone(url: str, dest_root: pathlib.Path) -> pathlib.Path:
@@ -46,8 +47,8 @@ def shallow_clone(url: str, dest_root: pathlib.Path) -> pathlib.Path:
     Repo.clone_from(url, dest, depth=1, no_single_branch=True)
     return dest
 
-def add_repos_to_chroma(collection, repo_urls: List[str], batch_size: int = 100):
-    repos_root = pathlib.Path("/content/repos")
+def add_repos_to_chroma(collection, repo_urls: List[str], batch_size=BATCH_SIZE):
+    repos_root = pathlib.Path(REPOS_LOAD_PATH)
     total_chunks = 0
 
     for url in repo_urls:
@@ -66,7 +67,7 @@ def add_repos_to_chroma(collection, repo_urls: List[str], batch_size: int = 100)
             header = f"# File: {rel_path}\n"
             text = header + raw
 
-            chunks = chunk_text(text, chunk_size=1200, overlap=200)
+            chunks = chunk_text(text, chunk_size=CHUNK_SIZE, overlap=OVERLAP)
             for i, ch in enumerate(chunks):
                 doc_id = f"{repo_rel_base}:{rel_path}:{i}"
                 to_add_docs.append(ch)
