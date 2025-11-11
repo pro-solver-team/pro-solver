@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 
-DB_DIR = Path(__file__).resolve().parents[2]/'data'
+DB_DIR = Path(__file__).resolve().parents[3]/'data'
 
 COLLECTION_NAME = "math"
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"

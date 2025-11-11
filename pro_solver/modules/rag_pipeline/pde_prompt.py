@@ -2,8 +2,8 @@ from langchain_core.prompts import ChatPromptTemplate
 
 class PDEPPrompt():
   def __init__(self,
-               system_prompt: str,
-               user_prompt: str,
+               system_prompt: tuple,
+               user_prompt: tuple,
                context: bool
                ):
     self.system_prompt = system_prompt
@@ -15,7 +15,7 @@ class PDEPPrompt():
   def template(self) -> ChatPromptTemplate:
     if self.context:
         prompt_template = [
-            ("system", self.system_prompt),
+            self.system_prompt,
             ("human", "Use the following context to guide your answer: {context}\n" + self.user_prompt[1])
         ]
     else:
