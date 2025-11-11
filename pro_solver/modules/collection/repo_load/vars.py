@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 
-DB_DIR = Path(__file__).resolve().parents[3]/'data'
+DB_DIR = Path(__file__).resolve().parents[4]/'data'
 
 COLLECTION_NAME = "math"
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
@@ -55,4 +55,4 @@ CHUNK_SIZE = 1200
 OVERLAP = 200
 BATCH_SIZE = 100
 
-REPOS_LOAD_PATH = DB_DIR/"data"/"chroma"/"repos"
+REPOS_LOAD_PATH = DB_DIR/"chroma"/"repos"

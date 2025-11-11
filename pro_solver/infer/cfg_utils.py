@@ -11,7 +11,7 @@ def equation_cfg_generate(equation_name: str) -> tuple:
                 'rag_vars': equation,
                 'user_prompt': question_math_prompt,
                 'user_vars': equation,
-                'system_prompt': question_math_prompt,
+                'system_prompt': system_math_prompt,
                 'section_name': "math"
                 }
     code_cfg = {
@@ -19,7 +19,7 @@ def equation_cfg_generate(equation_name: str) -> tuple:
                 'rag_vars': equation,
                 'user_prompt': question_code_prompt,
                 'user_vars': equation,
-                'system_prompt': question_code_prompt,
+                'system_prompt': system_code_prompt,
                 'section_name': "code"
                 }
     return math_cfg, code_cfg

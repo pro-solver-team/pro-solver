@@ -76,6 +76,7 @@ def add_repos_to_chroma(collection, repo_urls: List[str], batch_size=BATCH_SIZE)
                     "repo_name": repo_rel_base,
                     "path": rel_path,
                     "chunk_index": i,
+                    "section": "code"
                 })
 
                 if len(to_add_ids) >= batch_size:
