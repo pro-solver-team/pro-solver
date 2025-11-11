@@ -37,7 +37,6 @@ class RagPipeline:
                 pde_output.function,
                 pde_output.example
             ])
-
             final_code = "\n\n".join([
                 pde_output.function])
 
