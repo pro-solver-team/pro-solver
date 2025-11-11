@@ -1,9 +1,0 @@
-defaults:
-  - equation_config
-
-rag_prompt: "${python:config.infer.config.vars.prompt_var.question_math_prompt}"
-rag_vars: "${equation_config.equation_input}"
-user_prompt: "${python:config.infer.config.vars.prompt_var.question_math_prompt}"
-user_vars: "${equation_config.equation_input}"
-system_prompt: "${python:config.infer.config.vars.prompt_var.system_math_prompt}"
-section_name: "math"
