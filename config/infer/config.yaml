@@ -1,5 +1,7 @@
-default:
-  - math_config
-  - code_config
+defaults:
+  - math_config@math
+  - code_config@code
+  - keys
+  - _self_
 
 LLM_NAME: "mistral-small-latest"

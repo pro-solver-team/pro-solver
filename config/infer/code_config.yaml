@@ -1,9 +1,11 @@
 defaults:
   - equation_config
+  - equation_var
+  - prompt_var
 
-rag_prompt: "${python:config.infer.config.vars.prompt_var.question_code_prompt}"
-rag_vars: "${equation_config.equation_input}"
-user_prompt: "${python:config.infer.config.vars.prompt_var.question_code_prompt}"
-user_vars: "${equation_config.equation_input}"
-system_prompt: "${python:config.infer.config.vars.prompt_var.system_code_prompt}"
+rag_prompt: "${question_code_prompt}"
+rag_vars: "${equation_input}"
+user_prompt: "${question_code_prompt}"
+user_vars: "${equation_input}"
+system_prompt: "${system_code_prompt}"
 section_name: "code"

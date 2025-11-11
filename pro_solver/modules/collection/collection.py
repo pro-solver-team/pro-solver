@@ -5,7 +5,8 @@ from pathlib import Path
 def initialize_collection(db_dir: str, collection_name: str, embedding_model: str):
     client = chromadb.PersistentClient(path=db_dir)
     embed_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
-        model_name=embedding_model
+        model_name=embedding_model,
+        model_kwargs={'token': False}
     )
     collection = client.get_or_create_collection(
         name=collection_name,

@@ -1,8 +1,11 @@
-import uuid
-from datasets import load_dataset, DatasetDict
 from pro_solver.modules.collection.dataset_load.dataset_process import to_q_a, make_doc_text, iter_rows
 from pro_solver.modules.collection.dataset_load.text_process import chunk_latex
 from pro_solver.modules.collection.dataset_load.vars import MAX_CHARS, OVERLAP, BATCH_SIZE
+import uuid
+from datasets import load_dataset, DatasetDict
+from chromadb.api.models.Collection import Collection
+from langchain_community.document_loaders import PyPDFLoader
+from pathlib import Path
 
 def upsert_dataset(collection, hf_repo: str, limit: int | None):
     print(f"\n=== Loading {hf_repo} ===")
@@ -56,3 +59,18 @@ def upsert_dataset(collection, hf_repo: str, limit: int | None):
             print(f"  ... final flush: total {total_added} chunks added for {hf_repo}")
 
     print(f" Done: {hf_repo}")
+
+
+def pdf_load(collection: Collection, pdf_path: Path) -> None:
+    loader = PyPDFLoader(pdf_path)
+    pages = loader.load_and_split()
+
+    texts = [page.page_content for page in pages]
+    ids = [f"page_{i}" for i in range(len(texts))]
+
+    ###MATH COLLECTION
+    collection.add(
+                    ids=ids,
+                    documents=texts,
+                    metadatas=[{"section": "math"} for _ in ids]
+                    )
