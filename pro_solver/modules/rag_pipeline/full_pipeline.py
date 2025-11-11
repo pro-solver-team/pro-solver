@@ -3,9 +3,9 @@ from omegaconf import DictConfig
 from pro_solver.modules.rag_pipeline.base_pipeline import ModelPipeline
 from pro_solver.modules.rag_pipeline.base_model import LLMModel
 from pro_solver.modules.validation.output_scheme import PDEOutput
-from pro_solver.modules.text_process import safe_json_parse
+from pro_solver.modules.collection.dataset_load.text_process import safe_json_parse
 
-from pro_solver.modules.validation.code_utils import code_save,code_check
+from pro_solver.modules.validation.code_utils import code_save, code_check
 
 from chromadb.api.models.Collection import Collection
 

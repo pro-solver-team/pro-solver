@@ -1,6 +1,7 @@
 import re
 from typing import Dict, List, Tuple
 from pro_solver.modules.collection.repo_load.vars import MATH_BLOCK_PATTERNS
+from pro_solver.modules.collection.dataset_load.vars import MAX_CHARS, OVERLAP, CHUNK_SIZE, BATCH_SIZE
 import nbformat
 import pathlib
 
@@ -22,7 +23,7 @@ def _unmask_math(text: str, masks: Dict[str, str]) -> str:
         text = text.replace(k, v)
     return text
 
-def chunk_latex(text: str, max_chars: int = 1200, overlap: int = 150) -> List[str]:
+def chunk_latex(text: str, max_chars: int = MAX_CHARS, overlap: int = OVERLAP) -> List[str]:
     masked, masks = _mask_math(text)
     paras = [p for p in masked.split("\n\n") if p.strip()]
     chunks = []
@@ -79,7 +80,7 @@ def safe_read_text(path: pathlib.Path) -> str:
     except Exception as e:
         return f""
     
-def chunk_text(text: str, chunk_size: int = 1200, overlap: int = 200) -> List[str]:
+def chunk_text(text: str, chunk_size: int = CHUNK_SIZE, overlap: int = OVERLAP) -> List[str]:
     text = re.sub(r"\s+\n", "\n", text)
     chunks = []
     start = 0
