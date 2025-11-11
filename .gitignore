@@ -160,3 +160,4 @@ chroma/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+!/pro_solver/benchmark/dataset/Darcy_subset.hdf5

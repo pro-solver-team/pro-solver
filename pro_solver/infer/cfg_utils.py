@@ -1,7 +1,6 @@
 from pro_solver.infer.vars.infer_vars.math_prompt_var import system_math_prompt, question_math_prompt
 from pro_solver.infer.vars.infer_vars.code_prompt_var import system_code_prompt, question_code_prompt
 from pro_solver.infer.vars.infer_vars.equation_var import EQUATIONS_DATASET
-#import fire
 
 def equation_cfg_generate(equation_name: str) -> tuple:
 
@@ -23,8 +22,3 @@ def equation_cfg_generate(equation_name: str) -> tuple:
                 'section_name': "code"
                 }
     return math_cfg, code_cfg
-
-
-#if __name__ == "__main__":
-#    fire.Fire(model_cfg_generate)
-

@@ -25,10 +25,8 @@ class RagPipeline:
 
     def __call__(self, name):
         math_context = self.math_pipeline.generate_response(self.collection, self.page_num)
-        #print(math_context)
         while (True):
             code_text = self.code_pipeline.generate_response(self.collection, self.page_num, math_context)
-            #print(code_text)
             try:
                 code_json = safe_json_parse(code_text)
             except:
