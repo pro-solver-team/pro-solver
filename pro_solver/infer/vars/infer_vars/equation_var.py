@@ -24,3 +24,4 @@ EQUATIONS_DATASET = {
                      'rec_diff': ReacDiff_Nu05_Rho20_dict,
                      'darcy2d': Darcy_2d_betta_01_dict
                      }
+

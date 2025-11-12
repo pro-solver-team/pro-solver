@@ -18,3 +18,9 @@ def code_save(code: str,
   file_path = f"{name}.py"
   with open(file_path, "w", encoding="utf-8") as f:
       f.write(code)
+
+def code_to_str(name: str) -> str:
+  file_path = f"{name}.py"
+  with open(file_path, 'r') as f:
+    content = f.read()
+  return content
