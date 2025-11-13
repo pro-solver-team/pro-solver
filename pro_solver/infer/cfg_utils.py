@@ -1,6 +1,6 @@
 from pro_solver.infer.vars.infer_vars.math_prompt_var import system_math_prompt, question_math_prompt
 from pro_solver.infer.vars.infer_vars.code_prompt_var import system_code_prompt, question_code_prompt
-from pro_solver.infer.vars.infer_vars.equation_var import EQUATIONS_DATASET
+from pro_solver.infer.vars.infer_vars.equation_var import EQUATIONS_DATASET, EQUATION_QUERIES
 from pro_solver.modules.validation.code_utils import code_to_str
 
 def equation_cfg_generate(equation_name: str) -> tuple:
@@ -46,4 +46,6 @@ def equation_cfg_for_correction_generate(equation_name: str, code_to_check_name)
                 'section_name': "code"
                 }
     
-    return arxiv_cfg, code_to_check_cfg
+    query = EQUATION_QUERIES[equation_name]
+    
+    return arxiv_cfg, code_to_check_cfg, query

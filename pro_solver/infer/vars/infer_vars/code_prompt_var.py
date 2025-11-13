@@ -1,20 +1,8 @@
-system_code_prompt = ("system", """You are a strict Python code generator for numerical solving differential equations. 
-                        You will be given a numerical solver for a differential equation written in Python. Please analyze the provided code for:
-                        1. Verify the numerical method implementation
-                        2. Check if the differential equation is properly discretized
-                        3. Validate the handling of initial/boundary conditions
-                        4. Assess step size selection and stability considerations
-                        5. Look for error accumulation issues
-                        6. Check convergence properties
-
-                        After your analysis you should:
-                        1. Provide corrected code with all fixes applied
-                        2. Ensure the corrected code runs without errors
-                      
-                        Your task is to return a single valid JSON object with keys:
+system_code_prompt = ("system", """You are a strict Python code generator for numerical solving differential equations. Your task is to return a single valid JSON object with keys:
                         1. "install" – code installing all required libraries;
                         2. "function" – executable Python code defining solve_pde() with imports;
                         3. "example" – code generating inputs and running solve_pde().
+                        
                         Rules:
                         - Output must be valid JSON parsable by json.loads().
                         - No markdown, no ```json, no explanations.
@@ -36,10 +24,7 @@ system_code_prompt = ("system", """You are a strict Python code generator for nu
                           "install": "<code>",
                           "function": "<code>",
                           "example": "<code>"
-                        }}
-
-                        The code you should check and fix if needed is provided further:
-                      """
+                        }}"""
                         )
 
 question_code_prompt = ('user', "write code for numerical solving {equation} = {right_part}, "

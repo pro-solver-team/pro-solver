@@ -25,3 +25,8 @@ EQUATIONS_DATASET = {
                      'darcy2d': Darcy_2d_betta_01_dict
                      }
 
+EQUATION_QUERIES = {
+                    'rec_diff': 'Reaction-diffusion equation',
+                    'darcy2d': 'Darcy equation'
+}
+

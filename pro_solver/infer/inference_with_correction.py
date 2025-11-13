@@ -10,8 +10,7 @@ from pro_solver.database.arxiv_retriever import arxiv_to_chroma
 def main(api_key: str,
          name: str,
          output_name: str,
-         corrected_output_name: str,
-         query: str
+         corrected_output_name: str
          ):
     model = LLMModel(api_key = api_key, model_name = llm_name)
     collection = load_collection(db_dir, collection_name, embedding_model)
@@ -24,14 +23,10 @@ def main(api_key: str,
 
     # ----- Correcting LLM with RAG -----
     correcting_model = LLMModel(api_key = api_key, model_name = llm_correct_name)
-
-    arxiv_cfg, code_to_check_cfg = equation_cfg_for_correction_generate(name, output_name)
-
+    arxiv_cfg, code_to_check_cfg, query = equation_cfg_for_correction_generate(name, output_name)
     arxiv_collection = arxiv_to_chroma(api_key=api_key, query=query)
     
-
     correction_pipeline = RagPipeline(correcting_model, arxiv_cfg, code_to_check_cfg, arxiv_collection)
-
     correction_pipeline(corrected_output_name)
 
 

@@ -18,4 +18,9 @@ poetry run python create_database.py
 Генерация кода:
 ```
  python <path to inference.py> <api key> <your equation name> <output script name>
-``` 
+```
+
+Генерация кода в режиме самокорректировки:
+```
+poetry run python inference_with_correction.py <api key> <your equation name> <output script name> <corrected output script name>
+```
