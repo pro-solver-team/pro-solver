@@ -237,7 +237,7 @@ DiffReact2D_FitzHughNagumo_dict = {
     )
 }
 
-EQ_DATASETS = {
+EQUATIONS_DATASET = {
     'Darcy_2d_betta_0.1': Darcy_2d_betta_01_dict,
     'ReacDiff_Nu05_Rho20': ReacDiff_Nu05_Rho20_dict,
     'Burgers1D_Nu001': Burgers1D_Nu001_dict,

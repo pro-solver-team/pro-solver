@@ -34,7 +34,7 @@ def main(api_key: str,
         collection = load_collection(db_dir, collection_name, embedding_model)
         pipeline = RagPipeline(model_code, model_math, math_cfg, code_cfg, code_anal_cfg, collection)
     else:
-        pipeline = RagPipeline(model_code, math_cfg, code_cfg, code_anal_cfg, None)
+        pipeline = RagPipeline(model_code, model_math, math_cfg, code_cfg, code_anal_cfg, None)
     #----- RAG ------
     pipeline(output_name, **math_vars, **code_vars)
 
