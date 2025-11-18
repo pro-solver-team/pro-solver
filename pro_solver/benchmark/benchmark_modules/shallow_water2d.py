@@ -88,9 +88,9 @@ def solve_pde(x, y, t, u0, g=9.81, nu=0.0):
     @njit
     def pde_rhs(t_local, y_vec):
         # unpack primitive variables
-        h_flat = y_vec[0:Ny * Nx]
-        u_flat = y_vec[Ny * Nx:2 * Ny * Nx]
-        v_flat = y_vec[2 * Ny * Nx:3 * Ny * Nx]
+        h_flat = y_vec[0:Ny * Nx].copy()
+        u_flat = y_vec[Ny * Nx:2 * Ny * Nx].copy()
+        v_flat = y_vec[2 * Ny * Nx:3 * Ny * Nx].copy()
 
         h = h_flat.reshape((Ny, Nx))
         u = u_flat.reshape((Ny, Nx))

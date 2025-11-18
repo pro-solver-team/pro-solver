@@ -92,9 +92,13 @@ def solve_pde(x, y, t, u0, nu=0.01, fx=0.0, fy=0.0):
 
     @njit
     def pde_rhs(t_local, y_vec):
+        # SciPy может передать неконтинуальный массив.
+        # Делаем явную C-континуальную копию.
+        y_vec_c = np.ascontiguousarray(y_vec)
+
         # unpack velocities
-        u_flat = y_vec[0:Ny * Nx]
-        v_flat = y_vec[Ny * Nx:2 * Ny * Nx]
+        u_flat = y_vec_c[0:Ny * Nx]
+        v_flat = y_vec_c[Ny * Nx:2 * Ny * Nx]
 
         u = u_flat.reshape((Ny, Nx))
         v = v_flat.reshape((Ny, Nx))
@@ -120,11 +124,12 @@ def solve_pde(x, y, t, u0, nu=0.01, fx=0.0, fy=0.0):
         du_dt_flat = u_t.reshape(-1)
         dv_dt_flat = v_t.reshape(-1)
 
-        dy_vec = np.empty_like(y_vec)
+        dy_vec = np.empty_like(y_vec_c)
         dy_vec[0:Ny * Nx] = du_dt_flat
         dy_vec[Ny * Nx:2 * Ny * Nx] = dv_dt_flat
 
         return dy_vec
+
 
     sol = solve_ivp(
         pde_rhs,

@@ -29,27 +29,42 @@ def solve_pde(x, t, u0, nu=0.1):
     """
     Nx = len(x)
     Nt = len(t)
-
     dx = x[1] - x[0]
 
     @njit
     def pde_func(t_local, u):
         du = np.zeros_like(u)
 
+        # первая производная u_x с периодическими границами
         u_x = np.zeros_like(u)
         u_x[1:-1] = (u[2:] - u[:-2]) / (2.0 * dx)
         u_x[0] = (u[1] - u[-1]) / (2.0 * dx)
         u_x[-1] = (u[0] - u[-2]) / (2.0 * dx)
 
+        # вторая производная u_xx с периодическими границами
         u_xx = np.zeros_like(u)
         u_xx[1:-1] = (u[2:] - 2.0 * u[1:-1] + u[:-2]) / (dx ** 2)
         u_xx[0] = (u[1] - 2.0 * u[0] + u[-1]) / (dx ** 2)
         u_xx[-1] = (u[0] - 2.0 * u[-1] + u[-2]) / (dx ** 2)
 
+        # right-hand side: du/dt = -u * u_x + nu * u_xx
         du[:] = -u * u_x + nu * u_xx
 
         return du
 
-    sol = solve_ivp(pde_func, [t[0], t[-1]], u0, t_eval=t, method='BDF')
+    # ограничиваем максимальный шаг по времени для устойчивости
+    dt_min = float(np.min(np.diff(t)))
+
+    sol = solve_ivp(
+        pde_func,
+        (float(t[0]), float(t[-1])),
+        u0,
+        t_eval=t,
+        method='BDF',
+        max_step=dt_min,
+        rtol=1e-6,
+        atol=1e-9,
+    )
+
     u = sol.y.T
     return u
