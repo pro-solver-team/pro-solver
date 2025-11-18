@@ -18,8 +18,8 @@ class RagPipeline:
                  code_cfg: DictConfig,
                  code_anal_cfg: DictConfig,
                  db: Optional[Collection],
-                 info_num_math: int = 1,
-                 info_num_code: int = 3
+                 info_num_math: int = 5,
+                 info_num_code: int = 5
                  ):
         self.math_model = model_math
         self.code_model = model_code
@@ -56,7 +56,7 @@ class RagPipeline:
 
         code_user_vars['math_context'] = math_context
         code_user_vars['code_context'] = structured_code
-
+       # print(math_context, structured_code)
         while (True):
             code_text = self.code_pipeline.generate_response(
                                                              #db=self.collection,

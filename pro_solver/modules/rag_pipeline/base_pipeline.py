@@ -81,5 +81,4 @@ class ModelPipeline():
             **user_vars
         }
     prompt_temp = self.generate_prompt()
-    print(full_request)
     return self.llm(prompt_temp, full_request).content
