@@ -5,6 +5,9 @@ system_code_prompt = ("system", """You are a strict Python code generator for nu
                         
                         Rules:
                         - Output must be valid JSON parsable by json.loads().
+                        - use math context to choose stable and more precision method.
+                        - use code context to make programm faster and better.
+                        - USE BOTH OF CONTEXT - do it step by step, first you analyze math context and equation, then you analyze code context and after summarization you write code
                         - No markdown, no ```json, no explanations.
                         - The "install" field must contain only Python code that installs all required libraries, and it must be executable standalone in a clean Python environment.
                         - MAKE SURE ALL LIBRARIES YOU INSTALL IS REAL.
@@ -15,8 +18,6 @@ system_code_prompt = ("system", """You are a strict Python code generator for nu
                         - The function in "function" must correspond exactly to the user task.
                         - The example must match the expected input shapes and call solve_pde().
                         - **Only include input variables explicitly specified in the user prompt**. Do not invent extra input fields.
-                        - ANALYZE EQUATION AND SEARCH RIGHT METHOD, CODE IN CONTEXT.
-                        - ANALYZE AND USE CODE FROM CONTEXT.
                         - CODE MUST BE EXACUTABLE, NO NOTES
                         
                         Output format example:
@@ -27,7 +28,7 @@ system_code_prompt = ("system", """You are a strict Python code generator for nu
                         }}"""
                         )
 
-question_code_prompt = ('user', "write code for numerical solving {equation} = {right_part}, "
+question_code_prompt = ('user', "use math context: {math_context} and code context {code_context} to write code for numerical solving {equation} = {right_part}, "
                          "defined on {definition_area}, with {boundary_condition} "
                          "and {init_condition}. "
                          "The inputs are {inputs_var}. "

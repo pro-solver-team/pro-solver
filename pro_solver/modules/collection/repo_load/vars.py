@@ -48,7 +48,11 @@ MATH_BLOCK_PATTERNS = [
 
 PDF_PATHS = [
             'pdfs/Nonlin_methods.pdf',
-            'pdfs/numeric.pdf'
+            'pdfs/numeric.pdf',
+            'pdfs/Bayes_nonlin.pdf',
+            'pdfs/darcy_eq.pdf',
+            'pdfs/stable_darcy.pdf',
+            'pdfs/pde-mixed-types.pdf'
             ]
 
 CHUNK_SIZE = 1200

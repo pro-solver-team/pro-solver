@@ -66,7 +66,7 @@ def pdf_load(collection: Collection, pdf_path: Path) -> None:
     pages = loader.load_and_split()
 
     texts = [page.page_content for page in pages]
-    ids = [f"page_{i}" for i in range(len(texts))]
+    ids = [str(uuid.uuid4()) for _ in texts]
 
     ###MATH COLLECTION
     collection.add(

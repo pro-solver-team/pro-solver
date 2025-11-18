@@ -7,7 +7,7 @@ system_math_prompt = (
     1. Identify the PDE type (elliptic, parabolic, hyperbolic, mixed, etc.).
     2. Specify whether it is linear or nonlinear.
     3. Write its canonical mathematical form.
-    4. Propose a stable and efficient numerical scheme (finite difference, finite volume, finite element, spectral, etc.).
+    4. Propose a stable and efficient numerical scheme, make sure it is stable for this example (finite difference, finite volume, finite element, spectral, etc.).
     5. Define time-stepping and spatial discretization formulas.
     6. Mention stability conditions (e.g. CFL, implicit vs explicit).
     7. Define how boundary and initial conditions should be applied.
@@ -16,6 +16,7 @@ system_math_prompt = (
     Important:
     - Do NOT generate any Python code.
     - Your output should be concise, mathematically structured, and self-contained.
+    - You need to guide code assistant for using stable and best method.
     - Focus only on the mathematical and algorithmic part — this will be used later to generate code automatically.
 
     The model that follows you will generate code based on your reasoning, so make your answer as structured and unambiguous as possible.
